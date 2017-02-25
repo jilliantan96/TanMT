@@ -31,6 +31,15 @@ public class RollServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		//if no die value was selected
+		int dieValue;
+		if(request.getParameter("dieValue") != ("")) {
+			dieValue = Integer.parseInt(request.getParameter("dieValue"));
+		} else {
+			dieValue = -1;
+		}
+		
 		String url = "";
 		
 		//create objects
@@ -41,28 +50,42 @@ public class RollServlet extends HttpServlet {
 		//access hidden textboxes from bet.jsp
 		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")), 0);
 		
-		//tool.increment();
+		//get inputs from bet.jsp
+		String single;
+		if(request.getParameter("single") == (null)) {
+			single = "off";
+		} else {
+			single = request.getParameter("single");
+		}
 		
-		/*
-		//get input from bet.jsp
-		//request.getParameter("")
-		int singleBetAmount = Integer.parseInt(request.getParameter("singleBetAmount"));
-		//add amount to purse and set purse IF roll is a win?
-		amount += singleBetAmount;
+		int singleBetAmount;
 		
-		int tripleBetAmount = Integer.parseInt(request.getParameter("tripleBetAmount"));
-		//add amount to purse
+		if(request.getParameter("singleBetAmount") == ("")) {
+			singleBetAmount = 0;
+		} else {
+			singleBetAmount = Integer.parseInt(request.getParameter("singleBetAmount"));
+		}
+		
+		/*int tripleBetAmount = Integer.parseInt(request.getParameter("tripleBetAmount"));
 		
 		int bigBetAmount = Integer.parseInt(request.getParameter("bigBetAmount"));
-		//add amount to purse
 		
 		int smallBetAmount = Integer.parseInt(request.getParameter("smallBetAmount"));
-		//add amount to purse
 		
-		int fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount"));
-		//add amount to purse
+		int fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount")); */
 		
-		*/
+	if(dieValue != -1) {
+		if(single.equals("on")) {
+			if(dieValue==die1.getValue() || dieValue==die2.getValue() || dieValue==die3.getValue() ) {
+				tool.addToPurse(singleBetAmount);
+			} else {
+				tool.subtractFromPurse(singleBetAmount);
+			}
+		}
+		
+		
+		
+	}
 		
 		//initialize output
 		url = "/roll.jsp";

@@ -55,6 +55,7 @@ public class BetServlet extends HttpServlet {
 			
 		} else if(action.equals("Place Bet")) {
 				
+			
 			int currentRoll = Integer.parseInt(request.getParameter("currentRoll"));
 				int purse = Integer.parseInt(request.getParameter("purse"));
 				

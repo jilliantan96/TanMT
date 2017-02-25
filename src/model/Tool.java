@@ -42,6 +42,14 @@ public class Tool {
 		this.purse = purse;
 	}
 	
+	public void addToPurse(int amount) {
+		this.purse = this.purse + amount;
+	}
+	
+	public void subtractFromPurse(int amount) {
+		this.purse = this.purse - amount;
+	}
+	
 	public int getAmount() {
 		return amount;
 	}

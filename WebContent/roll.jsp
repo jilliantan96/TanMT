@@ -7,9 +7,9 @@
 
 <%
 	//get inputs from request attribute
-	Die die1 = (Die) request.getAttribute("die1");
-	Die die2 = (Die) request.getAttribute("die2");
-	Die die3 = (Die) request.getAttribute("die3");
+	//Die die1 = (Die) request.getAttribute("die1");
+	//Die die2 = (Die) request.getAttribute("die2");
+	//Die die3 = (Die) request.getAttribute("die3");
 	Tool tool = (Tool) request.getAttribute("tool");
 	//Tool purse = (Tool) request.getAttribute("purse");
 	
@@ -25,13 +25,11 @@
 	int fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount"));
 	*/
 	
-	/*just for testing
-	System.out.println(singleBetAmount);
-	System.out.println(tripleBetAmount);
-	System.out.println(bigBetAmount);
-	System.out.println(smallBetAmount);
-	System.out.println(fieldBetAmount);
-	*/
+	Die[] dieArray = new Die[3];
+	dieArray[0] = (Die) request.getAttribute("die1");
+	dieArray[1] = (Die) request.getAttribute("die2");
+	dieArray[2] = (Die) request.getAttribute("die3");
+	
 %>
 
     
@@ -52,78 +50,43 @@
 	Current Roll: <%= tool.getCurrentRoll() %>
 </p>
 <br>
-	
-	<%	if(die1.getValue()==1) { %>
+
+	 <%
+	for(int i = 0; i < 3; i++) {	
+		if(dieArray[i].getValue()==1) { %>
 		<img src ="Dice-1.png">
-	<% } %>
-	<%	if(die1.getValue()==2) { %>
+	 <%  } 
+		if(dieArray[i].getValue()==2) { %>
 		<img src ="Dice-2.png">
-	<% } %>
-	<%	if(die1.getValue()==3) { %>
+	 <% } 
+		if(dieArray[i].getValue()==3) { %>
 		<img src ="Dice-3.png">
-	<% } %>
-	<%	if(die1.getValue()==4) { %>
+	 <% } 
+		if(dieArray[i].getValue()==4) { %>
 		<img src ="Dice-4.png">
-	<% } %>
-	<%	if(die1.getValue()==5) { %>
+	 <% } 
+		if(dieArray[i].getValue()==5) { %>
 		<img src ="Dice-5.png">
-	<% } %>
-	<%	if(die1.getValue()==6) { %>
+	 <% } 
+		if(dieArray[i].getValue()==6) { %>
 		<img src ="Dice-6.png">
-	<% } %>
-	
-	
-	<%	if(die2.getValue()==1) { %>
-		<img src ="Dice-1.png">
-	<% } %>
-	<%	if(die2.getValue()==2) { %>
-		<img src ="Dice-2.png">
-	<% } %>
-	<%	if(die2.getValue()==3) { %>
-		<img src ="Dice-3.png">
-	<% } %>
-	<%	if(die2.getValue()==4) { %>
-		<img src ="Dice-4.png">
-	<% } %>
-	<%	if(die2.getValue()==5) { %>
-		<img src ="Dice-5.png">
-	<% } %>
-	<%	if(die2.getValue()==6) { %>
-		<img src ="Dice-6.png">
-	<% } %>
-	
-	<%	if(die3.getValue()==1) { %>
-		<img src ="Dice-1.png">
-	<% } %>
-	<%	if(die3.getValue()==2) { %>
-		<img src ="Dice-2.png">
-	<% } %>
-	<%	if(die3.getValue()==3) { %>
-		<img src ="Dice-3.png">
-	<% } %>
-	<%	if(die3.getValue()==4) { %>
-		<img src ="Dice-4.png">
-	<% } %>
-	<%	if(die3.getValue()==5) { %>
-		<img src ="Dice-5.png">
-	<% } %>
-	<%	if(die3.getValue()==6) { %>
-		<img src ="Dice-6.png">
-	<% } %>
+	 <% } 
+		} 								%>
 
 <br>
 
 <form name="rollAgain" action="betAgain" method="get">
 	<input type="submit" name="submit" value="Place Bet" />
+	
+	<!-- Hidden Textboxes to store amounts -->
+		<input type="hidden" name="purse" value="<%= tool.getPurse() %>" />
+		<input type="hidden" name="currentRoll" value="<%= tool.getCurrentRoll() %>" />
+		
 </form>
 
 <form name="quit" action="quitGame" method="get">
 	<input type="submit" name="quit" value="Quit" />
 </form>
-
-<!-- Hidden Textboxes to store amounts -->
-		<input type="hidden" name="purse" value="<%= tool.getPurse() %>"/>
-		<input type="hidden" name="currentRoll" value="<%= tool.getCurrentRoll() %>"/>
 	
 
 </body>
