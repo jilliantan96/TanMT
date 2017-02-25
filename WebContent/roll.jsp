@@ -32,8 +32,9 @@
 
 <p>
 	Current Purse: <%= cf.format(tool.getPurse()) %>
+	<br>
 </p>
-<br>
+
 <p>
 	Current Roll: <%= tool.getCurrentRoll() %>
 </p>
@@ -64,6 +65,45 @@
 <br>
 
 
+<%	String singleOutcome = (String) request.getAttribute("singleOutcome");
+	String tripleOutcome = (String) request.getAttribute("tripleOutcome");
+	String bigOutcome = (String) request.getAttribute("bigOutcome");
+	String smallOutcome = (String) request.getAttribute("smallOutcome");
+	String fieldOutcome = (String) request.getAttribute("fieldOutcome");
+	String totalOutcome = (String) request.getAttribute("totalOutcome");
+	
+%>
+
+
+<% if(!singleOutcome.equals("Did not play")) { %>
+	<%= singleOutcome %> 
+	<br>
+<% } %>
+
+<% if(!tripleOutcome.equals("Did not play")) { %>
+	<%= tripleOutcome %>
+	<br>
+<% } %>
+
+<% if(!bigOutcome.equals("Did not play")) { %>
+	<%= bigOutcome %>
+	<br>
+<% } %>
+
+<% if(!smallOutcome.equals("Did not play")) { %>
+	<%= smallOutcome %>
+	<br>
+<% } %>
+
+<% if(!fieldOutcome.equals("Did not play")) { %>
+	<%= fieldOutcome %>
+	<br>
+<% } %>
+
+<%= totalOutcome %>
+
+<br>
+	
 
 <form name="rollAgain" action="betAgain" method="get">
 	<input type="submit" name="submit" value="Place Bet" />

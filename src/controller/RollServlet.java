@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.text.NumberFormat;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -34,12 +35,10 @@ public class RollServlet extends HttpServlet {
 		
 		//if no die value was selected
 		int dieValue;
-		if(request.getParameter("dieValue") != ("")) {
 			dieValue = Integer.parseInt(request.getParameter("dieValue"));
-		} else {
-			dieValue = -1;
-		}
 		
+		NumberFormat cf = NumberFormat.getCurrencyInstance();
+			
 		String url = "";
 		
 		//create objects
@@ -87,92 +86,137 @@ public class RollServlet extends HttpServlet {
 		}
 		
 	//see if there is a wager amount
-	int singleBetAmount;
-		if(request.getParameter("singleBetAmount") == ("")) {
-			singleBetAmount = 0;
-		} else {
-			singleBetAmount = Integer.parseInt(request.getParameter("singleBetAmount"));
+		int singleBetAmount;
+			if(request.getParameter("singleBetAmount") == ("")) {
+				singleBetAmount = 0;
+			} else {
+				singleBetAmount = Integer.parseInt(request.getParameter("singleBetAmount"));
 		}
 		
-	int tripleBetAmount;
-		if(request.getParameter("tripleBetAmount") == ("")) {
-			tripleBetAmount = 0;
-		} else {
-			tripleBetAmount = Integer.parseInt(request.getParameter("tripleBetAmount"));
+		int tripleBetAmount;
+			if(request.getParameter("tripleBetAmount") == ("")) {
+				tripleBetAmount = 0;
+			} else {
+				tripleBetAmount = Integer.parseInt(request.getParameter("tripleBetAmount"));
 		}
-		
-	int bigBetAmount;
-		if(request.getParameter("bigBetAmount") == ("")) {
-			bigBetAmount = 0;
-		} else {
-			bigBetAmount = Integer.parseInt(request.getParameter("bigBetAmount"));
+			
+		int bigBetAmount;
+			if(request.getParameter("bigBetAmount") == ("")) {
+				bigBetAmount = 0;
+			} else {
+				bigBetAmount = Integer.parseInt(request.getParameter("bigBetAmount"));
 		}
-		
-	int smallBetAmount;
-		if(request.getParameter("smallBetAmount") == ("")) {
-			smallBetAmount = 0;
-		} else {
-			smallBetAmount = Integer.parseInt(request.getParameter("smallBetAmount"));
+			
+		int smallBetAmount;
+			if(request.getParameter("smallBetAmount") == ("")) {
+				smallBetAmount = 0;
+			} else {
+				smallBetAmount = Integer.parseInt(request.getParameter("smallBetAmount"));
 		}
-		
-	int fieldBetAmount;
-		if(request.getParameter("fieldBetAmount") == ("")) {
-			fieldBetAmount = 0;
-		} else {
-			fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount")); 
+			
+		int fieldBetAmount;
+			if(request.getParameter("fieldBetAmount") == ("")) {
+				fieldBetAmount = 0;
+			} else {
+				fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount")); 
 		}
-		
+			
 		//runs only if they selected a die value to bet on & adds/subtracts from purse accordingly
-	if(dieValue != -1) {
+		
+		int total = 0;
+		String totalOutcome = "";
+			
+		String singleOutcome = "Did not play";
+		String tripleOutcome = "Did not play";
+		String bigOutcome = "Did not play";
+		String smallOutcome = "Did not play";
+		String fieldOutcome = "Did not play";
+			
 		if(single.equals("on")) {
-			if(dieValue==die1.getValue() || dieValue==die2.getValue() || dieValue==die3.getValue() ) {
-				tool.addToPurse(singleBetAmount);
-			} else {
-				tool.subtractFromPurse(singleBetAmount);
+			if(singleBetAmount != 0) {
+				if(dieValue==die1.getValue() || dieValue==die2.getValue() || dieValue==die3.getValue() ) {
+					tool.addToPurse(singleBetAmount);
+					singleOutcome = "Single Bet - Winner - winnings: " + cf.format(singleBetAmount);
+					total += singleBetAmount;
+				} else {
+					tool.subtractFromPurse(singleBetAmount);
+					singleOutcome = "Single Bet - Loser - losses: -" + cf.format(singleBetAmount);
+					total -= singleBetAmount;
+				}
 			}
 		}
-	
-	//HOW TO CALCULATE SCORE?
+		
+		//HOW TO CALCULATE SCORE?
 		if(triple.equals("on")) {
-			if(dieValue==die1.getValue() && dieValue==die2.getValue() && dieValue==die3.getValue() ) {
-				tool.addToPurse(tripleBetAmount*3);
-			} else {
-				tool.subtractFromPurse(tripleBetAmount*3);
+			if(tripleBetAmount != 0) {
+				if(dieValue==die1.getValue() && dieValue==die2.getValue() && dieValue==die3.getValue() ) {
+					tool.addToPurse(tripleBetAmount*3);
+					tripleOutcome = "Triple Bet - Winner - winnings: " + cf.format((tripleBetAmount*3));
+					total += (tripleBetAmount*3);
+				} else {
+					tool.subtractFromPurse(tripleBetAmount);
+					tripleOutcome = "Triple Bet - Loser - losses: -" + cf.format(tripleBetAmount);
+					total -= tripleBetAmount;
+				}
 			}
 		}
-	
-	
-	//HAVE TO SELECT A DIEVALUE TO RUN THIS WHEN YOU ONLY NEED THE SUM
-		int sum = 0;
-		sum = die1.getValue() + die2.getValue() + die3.getValue();
+		
+		
+			int sum = 0;
+			sum = die1.getValue() + die2.getValue() + die3.getValue();
+			
 		if(big.equals("on")) {
-			if(sum >= 11) {
-				tool.addToPurse(bigBetAmount);
-			} else {
-				tool.subtractFromPurse(bigBetAmount);
+			if(bigBetAmount != 0) {	
+				if(sum >= 11) {
+					tool.addToPurse(bigBetAmount);
+					bigOutcome = "Big Bet - Winner - winnings: " + cf.format(bigBetAmount);
+					total += bigBetAmount;
+				} else {
+					tool.subtractFromPurse(bigBetAmount);
+					bigOutcome = "Big Bet - Loser - losses: -" + cf.format(bigBetAmount);
+					total -= bigBetAmount;
+				}
 			}
 		}
 		
-	//HAVE TO SELECT A DIEVALUE TO RUN THIS WHEN YOU ONLY NEED THE SUM
+
 		if(small.equals("on")) {
-			if(sum <= 10) {
-				tool.addToPurse(smallBetAmount);
-			} else {
-				tool.subtractFromPurse(smallBetAmount);
+			if(smallBetAmount != 0) {
+				if(sum <= 10) {
+					tool.addToPurse(smallBetAmount);
+					smallOutcome = "Small Bet - Winner - winnings: " + cf.format(smallBetAmount);
+					total += smallBetAmount;
+				} else {
+					tool.subtractFromPurse(smallBetAmount);
+					smallOutcome = "Small Bet - Loser - losses: -" + cf.format(smallBetAmount);
+					total -= smallBetAmount;
+				}
 			}
 		}
 		
-	//HAVE TO SELECT A DIEVALUE TO RUN THIS WHEN YOU ONLY NEED THE SUM
-	//SUM OUTSIDE THE RANGE OF 8 TO 12?
+	
+		//SUM OUTSIDE THE RANGE OF 8 TO 12?
 		if(field.equals("on")) {
-			if(sum >= 8 && sum <= 12) {
-				tool.addToPurse(fieldBetAmount);
-			} else {
-				tool.subtractFromPurse(fieldBetAmount);
+			if(fieldBetAmount != 0) {
+				if(sum >= 8 && sum <= 12) {
+					tool.subtractFromPurse(fieldBetAmount);
+					fieldOutcome = "Field Bet - Loser - Losses: -" + cf.format(fieldBetAmount);
+					total -= fieldBetAmount;
+				} else {
+					tool.addToPurse(fieldBetAmount);
+					fieldOutcome = "Field Bet - Winner - winnings: " + cf.format(fieldBetAmount);
+					total += fieldBetAmount;
+				}
 			}
 		}
 
-	}	
+		if(total > 0) {
+			totalOutcome = "Total winnings from this roll: " + cf.format(total);
+		} else if (total < 0) {
+			totalOutcome = "Total losses from this roll: " + cf.format(total);
+		} else {
+			totalOutcome = "You broke even!";
+		}
 	
 		
 		//initialize output
@@ -183,6 +227,13 @@ public class RollServlet extends HttpServlet {
 		request.setAttribute("die2", die2);
 		request.setAttribute("die3", die3);
 		request.setAttribute("tool", tool);
+		
+		request.setAttribute("singleOutcome", singleOutcome);
+		request.setAttribute("tripleOutcome", tripleOutcome);
+		request.setAttribute("bigOutcome", bigOutcome);
+		request.setAttribute("smallOutcome", smallOutcome);
+		request.setAttribute("fieldOutcome", fieldOutcome);
+		request.setAttribute("totalOutcome", totalOutcome);
 		
 		//send control to next component
 		RequestDispatcher dispatcher = request.getRequestDispatcher(url);
