@@ -33,7 +33,7 @@ public class BetServlet extends HttpServlet {
 		
 			//Tool currentRoll = new Tool();
 			//get inputs from index.jsp
-			Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")), 0);
+			Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")));
 			
 			//Tool purse = new Tool();
 			String url = "";	

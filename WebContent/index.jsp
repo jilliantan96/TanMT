@@ -4,7 +4,7 @@
 <%@page import="model.Tool" %>
 <%@page import="java.text.NumberFormat" %>
 
-<%  Tool tool = new Tool(0, 1000, 0);
+<%  Tool tool = new Tool(0, 1000);
 
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 %>
@@ -21,7 +21,7 @@
 <body>
 <h1> MIST 4630 Chuck-a-Luck Game </h1>
 
-	<p>
+	<p id="info">
 	Place a bet and try your luck!
 	</p>
 	
@@ -31,12 +31,12 @@
 	
 	<br>
 	
-	<p>
+	<p id="info">
 	You start with a stake of <%= cf.format(tool.getPurse()) %>.
 	</p>
 	
 	<form name="play" action="playGame" method="get">
-	<input type="submit" name="submit" value="Play" />
+	<input id="button" type="submit" name="submit" value="Play" />
 	
 		<!-- Hidden Textboxes to store amounts -->
 		<input type="hidden" name="purse" value="<%= tool.getPurse() %>"/>

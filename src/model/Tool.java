@@ -20,10 +20,9 @@ public class Tool {
 	 * @param purse
 	 * @param amount
 	 */
-	public Tool(int currentRoll, int purse, int amount) {
+	public Tool(int currentRoll, int purse) {
 		this.currentRoll = currentRoll;
 		this.purse = purse;
-		this.amount = amount;
 	}
 	
 	public int getCurrentRoll() {
@@ -48,14 +47,6 @@ public class Tool {
 	
 	public void subtractFromPurse(int amount) {
 		this.purse = this.purse - amount;
-	}
-	
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
 	}
 	
 	public void increment() {

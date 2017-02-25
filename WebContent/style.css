@@ -4,7 +4,8 @@
 html {
 	border: 3px solid #0f70d2;
 	text-align: center;
-	color: #034c95;
+	color: #033b84;
+	background-color: #fafaf9;
 }
 
 /* keeping the headers black */
@@ -28,4 +29,23 @@ thead tr td {
 #total {
 	font-weight: bold;
 	font-size: 18px;
+	font-family: Georgia;
+}
+
+/* index.jsp directions */
+#info {
+	font-family: Georgia;
+	font-size: 16px
+}
+
+/* results page */
+#final {
+	font-family: Palatino;
+	font-size:16px
+}
+
+/* buttons */
+#button {
+	font-size: 16px;
+	padding: 10px;
 }

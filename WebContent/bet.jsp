@@ -27,11 +27,11 @@
 <body>
 <h1> MIST 4630 Chuck-a-Luck - Bet Page </h1>
 
-<p>
+<p id="info">
 	Current Purse: <%= cf.format(tool.getPurse()) %>
 </p>
 
-<p>
+<p id="info">
 	Current Roll: <%= tool.getCurrentRoll() %>
 </p>
 
@@ -136,7 +136,7 @@
 		<br> 
 		
 		<div style="text-align:center;">
-			<input type="submit" name="submit" value="Place Bet"/>
+			<input id="button" type="submit" name="submit" value="Place Bet"/>
 		</div>
 		
 </form>

@@ -34,7 +34,7 @@ public class ResultsServlet extends HttpServlet {
 		NumberFormat cf = NumberFormat.getCurrencyInstance();
 		
 		//get inputs from index.jsp
-		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")), 0);
+		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")));
 		
 		String url = "";	
 		

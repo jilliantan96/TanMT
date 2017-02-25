@@ -22,13 +22,13 @@
 <body>
 <h1>MIST 4630 Chuck-a-Luck - Results Page</h1>
 
-	<p> Final Purse: <%= cf.format(tool.getPurse()) %> </p>
+	<p id="final"> Final Purse: <%= cf.format(tool.getPurse()) %> </p>
 	
-	<p> Number of Rolls: <%= tool.getCurrentRoll() %> </p>
+	<p id="final"> Number of Rolls: <%= tool.getCurrentRoll() %> </p>
 	
-	<p> <%= msg %> </p>
+	<p id="final"> <%= msg %> </p>
 	
-		<a href = "index.jsp">Play Again!</a>
+		<a id="final" href = "index.jsp">Play Again!</a>
 
 </body>
 </html>

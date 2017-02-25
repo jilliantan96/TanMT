@@ -33,12 +33,12 @@
 <body>
 <h1>MIST 4630 Chuck-a-Luck - Roll Page</h1>
 
-<p>
+<p id="info">
 	Current Purse: <%= cf.format(tool.getPurse()) %>
 	<br>
 </p>
 
-<p>
+<p id="info">
 	Current Roll: <%= tool.getCurrentRoll() %>
 </p>
 <br>
@@ -111,7 +111,7 @@
 <% if(tool.getPurse() > 0) { %>	
 
 <form name="rollAgain" action="betAgain" method="get">
-	<input type="submit" name="submit" value="Place Bet" />
+	<input id="button" type="submit" name="submit" value="Place Bet" />
 	
 <% } %>
 	
@@ -122,7 +122,7 @@
 </form>
 
 <form name="quit" action="quitGame" method="get">
-	<input type="submit" name="quit" value="Quit" />
+	<input id="button" type="submit" name="quit" value="Quit" />
 	
 	<!-- Hidden Textboxes to store amounts -->
 		<input type="hidden" name="purse" value="<%= tool.getPurse() %>" />

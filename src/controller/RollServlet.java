@@ -47,7 +47,7 @@ public class RollServlet extends HttpServlet {
 		Die die3 = new Die();
 		
 		//access hidden textboxes from bet.jsp
-		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")), 0);
+		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")));
 		
 	//check if the boxes are checked
 	String single;
