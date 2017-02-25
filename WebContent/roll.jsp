@@ -24,6 +24,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+	<link type = "text/css" rel = "stylesheet" href = "style.css" />
+	
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MIST 4630 Chuck-a-Luck - Roll Page</title>
 </head>
@@ -74,6 +77,7 @@
 	
 %>
 
+<br>
 
 <% if(!singleOutcome.equals("Did not play")) { %>
 	<%= singleOutcome %> 
@@ -100,13 +104,16 @@
 	<br>
 <% } %>
 
-<%= totalOutcome %>
+<p id="total"> <%= totalOutcome %> </p>
 
 <br>
-	
+
+<% if(tool.getPurse() > 0) { %>	
 
 <form name="rollAgain" action="betAgain" method="get">
 	<input type="submit" name="submit" value="Place Bet" />
+	
+<% } %>
 	
 	<!-- Hidden Textboxes to store amounts -->
 		<input type="hidden" name="purse" value="<%= tool.getPurse() %>" />
@@ -116,6 +123,11 @@
 
 <form name="quit" action="quitGame" method="get">
 	<input type="submit" name="quit" value="Quit" />
+	
+	<!-- Hidden Textboxes to store amounts -->
+		<input type="hidden" name="purse" value="<%= tool.getPurse() %>" />
+		<input type="hidden" name="currentRoll" value="<%= tool.getCurrentRoll() %>" />
+		
 </form>
 	
 

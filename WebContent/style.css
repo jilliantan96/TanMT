@@ -1,0 +1,31 @@
+@CHARSET "UTF-8";
+
+/* general styling for the entire game */
+html {
+	border: 3px solid #0f70d2;
+	text-align: center;
+	color: #034c95;
+}
+
+/* keeping the headers black */
+h1 {
+	color: black;
+}
+
+th, td {
+	padding: 10px;
+	text-align: left;
+}
+
+/* table column names */
+thead tr td {
+	font-size: 20px;
+	text-align: center;
+	color: black;
+}
+
+/* the total row on the results page */
+#total {
+	font-weight: bold;
+	font-size: 18px;
+}

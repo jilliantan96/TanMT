@@ -18,6 +18,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
+
+	<link type = "text/css" rel = "stylesheet" href = "style.css" />
+
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>MIST 4630 Chuck-a-Luck - Bet Page</title>
 </head>
@@ -33,14 +36,14 @@
 </p>
 
 <form name="betPage" action="placeBet" method="get">
-	<table border=1 frame=hsides rules=rows>
+	<table border="1" frame="hsides" rules="rows" align="center">
 	
 	<thead>
 		<tr>
-			<td>Type</td>
-			<td>Description</td>
-			<td>Wager</td>
-			<td>Odds</td>
+			<td><strong>Type</strong></td>
+			<td><strong>Description</strong></td>
+			<td><strong>Wager</strong></td>
+			<td><strong>Odds</strong></td>
 		</tr>
 	</thead>
 	

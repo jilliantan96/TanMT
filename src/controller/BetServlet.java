@@ -30,10 +30,7 @@ public class BetServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			
-		String action = request.getParameter("submit");
-			
-		if(action.equals("Play")) {
+		
 			//Tool currentRoll = new Tool();
 			//get inputs from index.jsp
 			Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")), 0);
@@ -52,25 +49,6 @@ public class BetServlet extends HttpServlet {
 			//send control to next component
 			RequestDispatcher dispatcher = request.getRequestDispatcher(url);
 			dispatcher.forward(request, response);
-			
-		} else if(action.equals("Place Bet")) {
-				
-			
-			int currentRoll = Integer.parseInt(request.getParameter("currentRoll"));
-				int purse = Integer.parseInt(request.getParameter("purse"));
-				
-				Tool tool = new Tool(currentRoll, purse, 0);
-				
-				tool.increment();
-				String url = "";
-				url = "/bet.jsp";
-				
-				request.setAttribute("tool", tool);
-				
-				RequestDispatcher dispatcher = request.getRequestDispatcher(url);
-				dispatcher.forward(request, response);
-				
-			}
 	}
 
 	/**
