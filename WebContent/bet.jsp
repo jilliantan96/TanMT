@@ -69,7 +69,7 @@
 			</tr>
 			<tr>
 				<td>
-					<input type="checkbox" name="anyTriple"/> <label> Any Triple </label>
+					<input type="checkbox" name="triple"/> <label> Any Triple </label>
 				</td>
 				<td>
 					Any of the triples

@@ -7,24 +7,12 @@
 
 <%
 	//get inputs from request attribute
-	//Die die1 = (Die) request.getAttribute("die1");
-	//Die die2 = (Die) request.getAttribute("die2");
-	//Die die3 = (Die) request.getAttribute("die3");
 	Tool tool = (Tool) request.getAttribute("tool");
-	//Tool purse = (Tool) request.getAttribute("purse");
-	
 	
 	//get number formats
 	NumberFormat cf = NumberFormat.getCurrencyInstance();
 	
-	/* ahhhh
-	int singleBetAmount = Integer.parseInt(request.getParameter("singleBetAmount"));
-	int tripleBetAmount = Integer.parseInt(request.getParameter("tripleBetAmount"));
-	int bigBetAmount = Integer.parseInt(request.getParameter("bigBetAmount"));
-	int smallBetAmount = Integer.parseInt(request.getParameter("smallBetAmount"));
-	int fieldBetAmount = Integer.parseInt(request.getParameter("fieldBetAmount"));
-	*/
-	
+	//create die array to store the 3 dice
 	Die[] dieArray = new Die[3];
 	dieArray[0] = (Die) request.getAttribute("die1");
 	dieArray[1] = (Die) request.getAttribute("die2");
@@ -74,6 +62,8 @@
 		} 								%>
 
 <br>
+
+
 
 <form name="rollAgain" action="betAgain" method="get">
 	<input type="submit" name="submit" value="Place Bet" />
