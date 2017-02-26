@@ -46,6 +46,11 @@ public class RollServlet extends HttpServlet {
 		Die die2 = new Die();
 		Die die3 = new Die();
 		
+		//testing purposes
+		//die1.setValue(6);
+		//die2.setValue(6);
+		//die3.setValue(6);
+		
 		//access hidden textboxes from bet.jsp
 		Tool tool = new Tool(Integer.parseInt(request.getParameter("currentRoll")), Integer.parseInt(request.getParameter("purse")));
 		
@@ -132,27 +137,53 @@ public class RollServlet extends HttpServlet {
 		String smallOutcome = "Did not play";
 		String fieldOutcome = "Did not play";
 			
+		int singleCount = 0;
+		
 		if(single.equals("on")) {
 			if(singleBetAmount != 0) {
-				if(dieValue==die1.getValue() || dieValue==die2.getValue() || dieValue==die3.getValue() ) {
-					tool.addToPurse(singleBetAmount);
-					singleOutcome = "Single Bet - Winner - winnings: " + cf.format(singleBetAmount);
-					total += singleBetAmount;
-				} else {
-					tool.subtractFromPurse(singleBetAmount);
-					singleOutcome = "Single Bet - Loser - losses: -" + cf.format(singleBetAmount);
-					total -= singleBetAmount;
+				if(dieValue==die1.getValue()) {
+					singleCount++;
 				}
-			}
+				if(dieValue==die2.getValue()) {
+					singleCount++;
+				}
+				if(dieValue==die3.getValue()) {
+					singleCount++;
+				}
+		switch(singleCount) {
+		case 1:
+			tool.addToPurse(singleBetAmount);
+			singleOutcome = "Single Bet - Winner - winnings: " + cf.format(singleBetAmount);
+			total += singleBetAmount;
+			break;
+		case 2:
+			tool.addToPurse(singleBetAmount*2);
+			singleOutcome = "Single Bet - Winner - winnings: " + cf.format(singleBetAmount*2);
+			total += singleBetAmount*2;
+			break;
+		case 3:
+			tool.addToPurse(singleBetAmount*10);
+			singleOutcome = "Single Bet - Winner - winnings: " + cf.format(singleBetAmount*10);
+			total += singleBetAmount*10;
+			break;
+		default:
+			tool.subtractFromPurse(singleBetAmount);
+			singleOutcome = "Single Bet - Loser - Losses: -" + cf.format(singleBetAmount);
+			total -= singleBetAmount;
+			break;
 		}
+			
+					
+					
+	}
+} 
 		
-		//HOW TO CALCULATE SCORE?
 		if(triple.equals("on")) {
 			if(tripleBetAmount != 0) {
 				if(dieValue==die1.getValue() && dieValue==die2.getValue() && dieValue==die3.getValue() ) {
-					tool.addToPurse(tripleBetAmount*3);
-					tripleOutcome = "Triple Bet - Winner - winnings: " + cf.format((tripleBetAmount*3));
-					total += (tripleBetAmount*3);
+					tool.addToPurse(tripleBetAmount*30);
+					tripleOutcome = "Triple Bet - Winner - winnings: " + cf.format((tripleBetAmount*30));
+					total += (tripleBetAmount*30);
 				} else {
 					tool.subtractFromPurse(tripleBetAmount);
 					tripleOutcome = "Triple Bet - Loser - losses: -" + cf.format(tripleBetAmount);
